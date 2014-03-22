@@ -14,7 +14,7 @@
 
 
 #define DEFAULT_INDICATOR_WIDTH 6.0f
-#define DEFAULT_INDICATOR_MARGIN 10.0f
+#define DEFAULT_INDICATOR_MARGIN 4.0f
 #define MIN_HEIGHT 36.0f
 
 typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
 - (void)_initialize
 {
 	_numberOfPages = 0;
-	_individualPageTaps = NO;
+	_individualPageTaps = YES;
     
 	self.backgroundColor = [UIColor clearColor];
 	_measuredIndicatorWidth = DEFAULT_INDICATOR_WIDTH;
@@ -431,7 +431,9 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
         }];
         
         if (pageTouched != -1) {
+            self.defersCurrentPageDisplay = YES;
             [self setCurrentPage:pageTouched sendEvent:YES canDefer:YES];
+            self.defersCurrentPageDisplay = YES;
             return;
         }
     }
