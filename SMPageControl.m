@@ -417,6 +417,7 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
 // touching down, sliding around, and releasing, still results in the page incrementing or decrementing.
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /*
 	UITouch *touch = [touches anyObject];
 	CGPoint point = [touch locationInView:self];
     
@@ -429,6 +430,10 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
                 *stop = YES;
             }
         }];
+        
+        if ( pageTouched == self.numberOfPages - 1) {
+            return;
+        }
         
         if (pageTouched != -1) {
             self.defersCurrentPageDisplay = YES;
@@ -446,7 +451,7 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
     } else {
         [self setCurrentPage:self.currentPage + 1 sendEvent:YES canDefer:YES];
     }
-    
+    */
 }
 
 #pragma mark - Accessors
@@ -498,7 +503,7 @@ typedef NS_ENUM(NSUInteger, SMPageControlImageType) {
 
 - (void)setCurrentPage:(NSInteger)currentPage sendEvent:(BOOL)sendEvent canDefer:(BOOL)defer
 {
-	_currentPage = MIN(MAX(0, currentPage), _numberOfPages - 1);
+	_currentPage = MIN(MAX(0, currentPage), _numberOfPages);
 	self.accessibilityPageControl.currentPage = self.currentPage;
 	
 	[self updateAccessibilityValue];
